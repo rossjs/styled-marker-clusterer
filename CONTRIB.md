@@ -4,7 +4,7 @@ How to contribute
 Want to help out? That's awesome!
 
 The library is open source and lives on GitHub at:
-https://github.com/googlemaps/v3-utility-library.
+https://github.com/googlemaps/v3-utility-library/tree/master/markerclusterer.
 Open an issue or fork the library and submit a pull request.
 
 Keep in mind that before we can accept any pull requests we have to jump
