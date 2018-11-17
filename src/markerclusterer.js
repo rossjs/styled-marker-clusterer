@@ -99,6 +99,12 @@ function MarkerClusterer(map, opt_markers, opt_options) {
   var options = opt_options || {};
 
   /**
+   * @type {function}
+   * @private
+   */
+  this.styleFunc_ = options['styleFunc'] || (() => ({ styles: {}}));
+
+  /**
    * @type {number}
    * @private
    */
@@ -1050,6 +1056,7 @@ function ClusterIcon(cluster, styles, opt_padding) {
   this.div_ = null;
   this.sums_ = null;
   this.visible_ = false;
+  this.styleFunc = cluster.markerClusterer_.styleFunc_;
 
   this.setMap(this.map_);
 }
@@ -1220,26 +1227,27 @@ ClusterIcon.prototype.setCenter = function(center) {
  * @return {string} The css style text.
  */
 ClusterIcon.prototype.createCss = function(pos) {
+  const markers = this.cluster_.getMarkers();
   var size = 15;
-    if (this.cluster_.getMarkers().length < 10) { size = 15; }
-    if (this.cluster_.getMarkers().length > 10 && this.cluster_.getMarkers().length < 100) { size = 22; }
-    if (this.cluster_.getMarkers().length > 100 && this.cluster_.getMarkers().length < 1000) { size = 30; }
-    if (this.cluster_.getMarkers().length > 1000) { size = 37; }
+  const customStyles = this.styleFunc(markers);
+  if (customStyles.size) size = customStyles.size;
 
-      style = ['border-radius : 50%',
-        'cursor        : pointer',
-        'position      : absolute',
-        'top           : ' + pos.y + 'px',
-        'left          : ' + pos.x + 'px',
-        'width         : ' + size * 2 + 'px',
-        'height        : ' + size * 2 + 'px',
-        'line-height   : ' + (size * 2 + 1) + 'px',
-        'text-align    : center',
-        'background-color: #51B3C3',
-        'color: #ffffff',
-        'font-size:14px'
-      ];
-    return style.join(";") + ';';
+  styles = {
+    'border-radius': '50%',
+    'cursor': 'pointer',
+    'position': 'absolute',
+    'top': `${pos.y}px`,
+    'left': `${pos.x}px`,
+    'width': `${size * 2}px`,
+    'height': `${size * 2}px`,
+    'line-height': `${size * 2 + 1}px`,
+    'text-align': 'center',
+    'background-color': '#51B3C3',
+    'color': '#ffffff',
+    'font-size': '14px',
+  };
+
+  return Object.entries({...styles, ...customStyles.styles}).reduce((acc, [key, value]) => `${acc}${key}:${value};`, '');
 };
 
 
