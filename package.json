@@ -1,19 +1,20 @@
 {
-  "name": "@google/markerclusterer",
-  "version": "1.0.4",
-  "author": "Google Inc.",
-  "description": "The library creates and manages per-zoom-level clusters for large amounts of markers.",
-  "main": "src/markerclusterer.js",
-  "files": ["src/markerclusterer.js"],
+  "name": "styled-marker-clusterer",
+  "version": "1.0.5",
+  "author": "Ross Topol",
+  "description": "The library is a fork of the Google Maps API v3 marker-clusterer utility library that includes the ability to pass a callback and add dynamic custom styles to your marker clusters.",
+  "main": "src/styledmarkerclusterer.js",
+  "files": ["src/styledmarkerclusterer.js"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/googlemaps/v3-utility-library.git"
+    "url": "https://github.com/rossjs/styled-marker-clusterer.git"
   },
   "keywords": [
     "google",
     "maps",
     "marker",
-    "cluster"
+    "cluster",
+    "styles"
   ],
   "license": "Apache-2.0",
   "bugs": {

@@ -1229,7 +1229,7 @@ ClusterIcon.prototype.setCenter = function(center) {
 ClusterIcon.prototype.createCss = function(pos) {
   const markers = this.cluster_.getMarkers();
   var size = 15;
-  const customStyles = this.styleFunc(markers);
+  const customStyles = this.styleFunc(markers) || { styles: {} };
   if (customStyles.size) size = customStyles.size;
 
   styles = {
