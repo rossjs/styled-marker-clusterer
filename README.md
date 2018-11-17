@@ -52,8 +52,8 @@ const styleFunc = (markers) => {
 
 // instantiate your map (after Google Maps API has loaded)
 var map = new google.maps.Map(document.getElementById('map'), {
-  zoom: 13,
-  center: { lat: 42.01308073078780, lng: -87.63038635253906 }
+  zoom: 10,
+  center: { lat: 41.9145, lng: -87.6627 }
 });
 
 const markers = [];
