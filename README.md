@@ -38,24 +38,13 @@ const data = {
   ],
 };
 
-// styling function to dynamically style clusters
-const styleFunc = (markers) => {
-  let size = 15;
-  const styles = {};
-  const isSpecial = markers.some(marker => marker.special);
-  if (isSpecial) {
-    size = 30;
-    styles['background-color'] = 'purple';
-  }
-  return { size, styles };
-}
-
 // instantiate your map (after Google Maps API has loaded)
 var map = new google.maps.Map(document.getElementById('map'), {
   zoom: 10,
   center: { lat: 41.9145, lng: -87.6627 }
 });
 
+// create array to store our markers
 const markers = [];
 
 // add regular ole' markers, nothing to see here
@@ -70,6 +59,24 @@ data.special.forEach(point => {
   markers.push(marker);
 });
 
-const cluster = new MarkerCluster(map, markers, { styleFunc });
+/* ------------------------------- THE GOOD STUFF ------------------------------- */
+
+// styling function to dynamically style clusters
+const styleFunc = (markers) => {
+  let size = 15;
+  // styles object of CSS styles
+  const styles = {};
+  const isSpecial = markers.some(marker => marker.special);
+  if (isSpecial) {
+    size = 30;
+    styles['background-color'] = 'purple';
+  }
+  return { size, styles };
+}
+
+// create your marker clusterer, passing it your map instance, an array of markers, and an options object
+const cluster = new StyledMarkerCluster(map, markers, { styleFunc });
 
 ```
+
+In addition to the `styleFunc` property, you can add any property to the options object that is listed at the [MarkerClusterer for Google Maps v3 API](https://googlemaps.github.io/js-marker-clusterer/docs/reference.html) page.
